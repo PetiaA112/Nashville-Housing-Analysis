@@ -1,0 +1,36 @@
+Nashville Housing Analysis
+--houses per city
+SELECT PropertySplitCity, COUNT(UniqueID) AS Houses_per_city
+FROM [Nashwille Housing Cleaned]
+GROUP BY PropertySplitCity
+--------------------------------------------------------------
+SELECT *
+FROM [Nashwille Housing Cleaned]
+
+
+
+--LandUse type and number
+SELECT LandUse, COUNT(UniqueID) AS Number_of_LandUse
+FROM [Nashwille Housing Cleaned]
+GROUP BY LandUse
+--------------------------------------------------------------
+--AVG price by LandUSe with count 
+SELECT LAndUse, AVG(SalePrice) AS AVG_price_per_LandUse, COUNT(UniqueID) AS Number_of_LandUse
+FROM [Nashwille Housing Cleaned]
+GROUP BY LandUse
+--------------------------------------------------------------
+
+--AVG price of LandUse and count of LandUse by on type and Property City
+SELECT PropertySplitCity, LandUse, AVG(SalePrice) AVG_Price, COUNT(UniqueID) AS Number_of_LandUse
+FROM [Nashwille Housing Cleaned]
+GROUP By PropertySplitCity, LandUse
+ORDER BY PropertySplitCity Desc
+
+--------------------------------------------------------------
+
+--Number of Houses in Nashville by PropertySplitAddress
+CREATE VIEW Number_of_Houses_NAshville_by_street  as
+SELECT PropertySplitAddress, COUNT(UniqueID) AS COUNT_, AVG(SalePrice) AS AVG_Price_per_House
+FROM [Nashwille Housing Cleaned]
+WHERE PropertySplitCity = ' NASHVILLE'
+GROUP BY PropertySplitAddress 
